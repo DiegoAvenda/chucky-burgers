@@ -1,0 +1,1 @@
+Pago con stripe cancelado

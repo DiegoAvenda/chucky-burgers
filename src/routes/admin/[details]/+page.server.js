@@ -11,9 +11,9 @@ export const load = async ({ locals, params }) => {
 
 	try {
 		const mongoClient = await client.connect();
-		const db = mongoClient.db('chili');
+		const db = mongoClient.db('chucky');
 		const orders = db.collection('orders');
-		const rawOrder = await orders.findOne({ _id: objectId });
+		const rawOrder = await orders.findOne({ _id: objectId }, { projection: { _id: 0 } });
 
 		const order = {
 			...rawOrder,
@@ -23,21 +23,7 @@ export const load = async ({ locals, params }) => {
 				hour: '2-digit',
 				minute: '2-digit',
 				hour12: false
-			}),
-			deliveredAt: rawOrder.deliveredAt
-				? rawOrder.deliveredAt.toLocaleTimeString('en-US', {
-						day: '2-digit',
-						month: '2-digit',
-						hour: '2-digit',
-						minute: '2-digit',
-						hour12: false
-					})
-				: null,
-			_id: rawOrder._id.toString(),
-			items: rawOrder.items.map((item) => ({
-				...item,
-				reading: item.reading ? item.reading.toString('base64') : null // Convierte solo si reading existe
-			}))
+			})
 		};
 
 		return {
@@ -56,7 +42,7 @@ export const actions = {
 
 		try {
 			const mongoClient = await client.connect();
-			const db = mongoClient.db('chili');
+			const db = mongoClient.db('chucky');
 			const orders = db.collection('orders');
 			const filter = { _id: objectId };
 			const updateDoc = {
@@ -92,7 +78,7 @@ export const actions = {
 			const fileBuffer = Buffer.from(await file.arrayBuffer());
 
 			const mongoClient = await client.connect();
-			const db = mongoClient.db('chili');
+			const db = mongoClient.db('chucky');
 			const orders = db.collection('orders');
 			const filter = { _id: objectId };
 			const updateDoc = {

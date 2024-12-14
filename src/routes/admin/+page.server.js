@@ -8,27 +8,19 @@ export const load = async ({ locals }) => {
 
 	try {
 		const mongoClient = await client.connect();
-		const db = mongoClient.db('chili');
+		const db = mongoClient.db('chucky');
 		const ordersCollection = db.collection('orders');
-		const query = { paymentCompleted: true, delivered: false };
-		const options = { sort: { createdAt: 1 } };
-
-		const rawOrders = await ordersCollection.find(query, options).toArray();
+		const query = { delivered: false };
+		const rawOrders = await ordersCollection.find(query, { sort: { createdAt: 1 } }).toArray();
 
 		const orders = rawOrders.map((order) => ({
 			...order,
 			_id: order._id.toString(),
 			createdAt: order.createdAt.toLocaleTimeString('en-US', {
-				day: '2-digit',
-				month: '2-digit',
 				hour: '2-digit',
 				minute: '2-digit',
-				hour12: false
-			}),
-			items: order.items.map((item) => ({
-				...item,
-				reading: item.reading ? item.reading.toString('base64') : null
-			}))
+				hour12: true
+			})
 		}));
 
 		return {

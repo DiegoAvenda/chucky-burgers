@@ -11,7 +11,7 @@ export const load = async ({ locals, params }) => {
 
 	try {
 		const mongoClient = await client.connect();
-		const db = mongoClient.db('chili');
+		const db = mongoClient.db('chucky');
 		const orders = db.collection('orders');
 		const rawOrder = await orders.findOne({ _id: objectId });
 

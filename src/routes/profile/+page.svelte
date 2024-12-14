@@ -1,36 +1,41 @@
 <script>
-	import { enhance } from '$app/forms';
-
-	let { username, pendingOrders, deliveredOrders } = $props();
+	import { onMount } from 'svelte';
+	import { Toaster, toast } from 'svelte-sonner';
+	let { data } = $props();
 </script>
 
-<p>Pending orders</p>
+<div class="prose mt-2 flex justify-center">
+	<h1>Pending orders</h1>
+</div>
 
-{#each pendingOrders as order}
-	<a href={`/profile/${order._id}`}>
-		<div class="font-medium">{order.items.length}</div>
-		<div class="hidden text-sm text-muted-foreground md:inline">
-			Created at: {order.createdAt}
-		</div>
-	</a>
-
-	<p>{order.createdAt}</p>
-	<p>${order.totalPrice}</p>
-{/each}
-{#if pendingOrders.length === 0}
-	You don't have pending orders
-{/if}
-
-<p>Delivered orders</p>
-
-{#each deliveredOrders as order}
-	<a href={`/profile/${order._id}`}>
-		<div class="flex items-center gap-4">
-			<div class="grid gap-1">
-				<p class="text-sm font-medium leading-none">Readings</p>
-				<p class="text-sm text-muted-foreground">{order.items.length}</p>
+<div class="my-6 flex flex-col items-center gap-1">
+	{#each data.orders as order}
+		<div class="card card-bordered card-compact w-96 bg-base-100 shadow-xl">
+			<div class="card-body">
+				<div class="flex items-center justify-between">
+					<p class="text-xl font-bold">{order.customerName}</p>
+					<p>Ordered at {order.createdAt}</p>
+				</div>
+				<table class="table">
+					<thead>
+						<tr>
+							<th>Dish</th>
+							<th>Qty</th>
+							<th>Total</th>
+						</tr>
+					</thead>
+					<tbody>
+						{#each order.items as item}
+							<tr>
+								<th>{item.name}</th>
+								<td>{item.quantity}</td>
+								<td>${item.total}</td>
+							</tr>
+						{/each}
+					</tbody>
+				</table>
+				<p class="font-bold">Total price ${order.totalPrice}</p>
 			</div>
-			<div class="ml-auto font-medium">${order.totalPrice}</div>
 		</div>
-	</a>
-{/each}
+	{/each}
+</div>

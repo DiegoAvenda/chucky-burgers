@@ -7,7 +7,7 @@ export async function validateSessionToken(token) {
 
 	try {
 		const mongoClient = await client.connect();
-		const db = mongoClient.db('chili');
+		const db = mongoClient.db('chucky');
 		const sessions = db.collection('sessions');
 		const session = await sessions.findOne({ id: sessionId });
 
@@ -53,7 +53,7 @@ export async function createSession(token, userId) {
 	};
 	try {
 		const mongoClient = await client.connect();
-		const database = mongoClient.db('chili');
+		const database = mongoClient.db('chucky');
 		const sessions = database.collection('sessions');
 		await sessions.insertOne(session);
 		return session;
@@ -65,7 +65,7 @@ export async function createSession(token, userId) {
 export async function invalidateSession(sessionId) {
 	try {
 		const mongoClient = await client.connect();
-		const db = mongoClient.db('chili');
+		const db = mongoClient.db('chucky');
 		const sessions = db.collection('sessions');
 		await sessions.deleteOne({ id: sessionId });
 	} catch (error) {

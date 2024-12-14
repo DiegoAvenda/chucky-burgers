@@ -28,7 +28,7 @@ function initWebPush() {
 async function deleteIfExpired(userId) {
 	try {
 		const mongoClient = await client.connect();
-		const db = mongoClient.db('chili');
+		const db = mongoClient.db('chucky');
 		const users = db.collection('users');
 		const filter = { googleId: userId };
 
@@ -46,7 +46,7 @@ async function deleteIfExpired(userId) {
 export async function notifUser(userId, payload) {
 	try {
 		const mongoClient = await client.connect();
-		const db = mongoClient.db('chili');
+		const db = mongoClient.db('chucky');
 		const users = db.collection('users');
 		const query = { googleId: userId };
 		const options = {

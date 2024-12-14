@@ -18,7 +18,7 @@ export const POST = async ({ locals, request }) => {
 
 	try {
 		const mongoClient = await client.connect();
-		const db = mongoClient.db('chili');
+		const db = mongoClient.db('chucky');
 		const users = db.collection('users');
 		const filter = { googleId: userId };
 		const updateDoc = {

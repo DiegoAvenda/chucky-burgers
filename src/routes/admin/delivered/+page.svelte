@@ -1,10 +1,42 @@
 <script>
-	import Orders from '../orders.svelte';
-
 	let { data } = $props();
 </script>
 
-<div class="m-8">
-	Delivered orders
-	<Orders orders={data.orders} />
+<div class="prose mt-2 flex justify-center">
+	<h1>Delivered orders</h1>
+</div>
+
+<div class="my-6 flex flex-col items-center gap-1">
+	{#each data.orders as order}
+		<div class="card card-bordered card-compact w-96 bg-base-100 shadow-xl">
+			<div class="card-body">
+				<div class="flex items-center justify-between">
+					<p class="text-xl font-bold">{order.customerName}</p>
+					<p>Created at {order.createdAt}</p>
+				</div>
+				<table class="table">
+					<thead>
+						<tr>
+							<th>Dish</th>
+							<th>Qty</th>
+							<th>Subtotal</th>
+						</tr>
+					</thead>
+					<tbody>
+						{#each order.items as item}
+							<tr>
+								<th>{item.name}</th>
+								<td>{item.quantity}</td>
+								<td>${item.total}</td>
+							</tr>
+						{/each}
+					</tbody>
+				</table>
+				<div class="flex items-center justify-between">
+					<p class="font-bold">Total price ${order.totalPrice}</p>
+					<p>Delivered at {order.deliveredAt}</p>
+				</div>
+			</div>
+		</div>
+	{/each}
 </div>

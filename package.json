@@ -43,13 +43,16 @@
 		"zod": "^3.23.8"
 	},
 	"dependencies": {
+		"@mapbox/mapbox-gl-geocoder": "^5.0.3",
 		"@oslojs/crypto": "^1.0.1",
 		"@oslojs/encoding": "^1.1.0",
 		"@paypal/paypal-js": "^8.1.2",
 		"@tailwindcss/typography": "^0.5.15",
 		"arctic": "^2.3.0",
 		"buffer-crc32": "^1.0.0",
+		"mapbox-gl": "^3.8.0",
 		"mongodb": "^6.11.0",
+		"stripe": "^17.4.0",
 		"web-push": "^3.6.7"
 	}
 }
