@@ -3,9 +3,7 @@
 </script>
 
 <div class="mt-4 flex flex-col items-center">
-	<div class="prose mt-2 flex justify-center">
-		<h1>Prepared orders</h1>
-	</div>
+	<h1 class="mt-2 flex justify-center">Prepared orders</h1>
 
 	<div class="my-6 flex flex-col items-center gap-1">
 		{#each data.orders as order (order._id)}

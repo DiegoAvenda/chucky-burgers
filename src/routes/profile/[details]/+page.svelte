@@ -5,14 +5,12 @@
 </script>
 
 <div class="m-4 flex flex-col items-center">
-	<div class="prose">
-		<h1>Order details page</h1>
-		{#if data.order.delivered}
-			<h2>Delivered order</h2>
-		{:else}
-			<h2>Pending order</h2>
-		{/if}
-	</div>
+	<h1>Order details page</h1>
+	{#if data.order.delivered}
+		<h2>Delivered order</h2>
+	{:else}
+		<h2>Pending order</h2>
+	{/if}
 
 	<div class="m-4">
 		<p>${order.totalPrice}</p>

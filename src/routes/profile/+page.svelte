@@ -5,9 +5,7 @@
 </script>
 
 <div class="flex flex-col items-center">
-	<div class="prose mt-4 flex justify-center">
-		<h1>Pending orders</h1>
-	</div>
+	<h1 class="mt-2 flex justify-center">Pending orders</h1>
 
 	<div class="my-6 flex flex-col items-center gap-1">
 		{#each data.orders as order}
@@ -21,7 +19,6 @@
 							<tr>
 								<th>Dish</th>
 								<th>Qty</th>
-								<th>Total $</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -29,7 +26,6 @@
 								<tr>
 									<th>{item.name}</th>
 									<td>{item.quantity}</td>
-									<td>{item.total}</td>
 								</tr>
 							{/each}
 						</tbody>
