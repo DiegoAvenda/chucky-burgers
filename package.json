@@ -47,6 +47,7 @@
 		"@oslojs/crypto": "^1.0.1",
 		"@oslojs/encoding": "^1.1.0",
 		"@paypal/paypal-js": "^8.1.2",
+		"@sveltejs/adapter-vercel": "^5.5.2",
 		"@tailwindcss/typography": "^0.5.15",
 		"arctic": "^2.3.0",
 		"buffer-crc32": "^1.0.0",
