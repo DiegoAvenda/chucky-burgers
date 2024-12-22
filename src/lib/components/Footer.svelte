@@ -1,5 +1,5 @@
 <footer
-	class="footer items-center bg-base-100 p-4 text-neutral-content"
+	class="footer items-center bg-base-100 p-4"
 	style="--tw-border-opacity: 1; border-top: 1px solid var(--fallback-b2, oklch(var(--b2) / var(--tw-border-opacity)));"
 >
 	<aside class="grid-flow-col items-center">
