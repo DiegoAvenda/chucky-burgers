@@ -22,11 +22,14 @@ export async function POST({ request }) {
 		const sessionId = charge.id;
 		const customerId = charge.metadata.customerId;
 		const location = JSON.parse(charge.metadata.location);
+		const address = charge.customer_details.address;
 
 		const lineItems = await stripe.checkout.sessions.listLineItems(sessionId);
+
 		const items = lineItems.data.map((item) => ({
 			name: item.description || 'Unknown product',
-			quantity: item.quantity
+			quantity: item.quantity,
+			total: item.amount_total
 		}));
 		const totalPrice = charge.amount_total;
 
@@ -43,11 +46,13 @@ export async function POST({ request }) {
 			await orders.insertOne({
 				customerId,
 				customerName,
+				address,
 				location,
 				items,
 				totalPrice,
 				createdAt: new Date(), // Fecha y hora de creación
-				delivered: false
+				delivered: false,
+				prepared: false
 			});
 			console.log('orden creada');
 

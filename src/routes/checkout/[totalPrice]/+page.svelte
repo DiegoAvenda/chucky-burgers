@@ -7,18 +7,13 @@
 
 	let { data } = $props();
 
-	let coordinates = $state(''); // Para mostrar las coordenadas actuales
+	let coordinates = $state([]); // Para mostrar las coordenadas actuales
 	let map;
 	let marker;
 	let geocoder;
-	let fullAddress = $state('');
-	let street = $state('');
-	let zip = $state('');
-	let city = $state('');
-	let state = $state('');
 
 	let totalPrice = $page.params.totalPrice;
-	let toggle = $state(false);
+	let toggleCheckout = $state(false);
 
 	const mapboxAccessToken =
 		'pk.eyJ1IjoiZGF2ZW5kYW5vaCIsImEiOiJjbTNieDh5aDEwejdjMmpwc2ozaGlvYzBkIn0.ZS1jDZX_RbhiMQC8_qJSog';
@@ -43,7 +38,7 @@
 			// Inicializar el mapa y el marcador
 			function setupMap(center) {
 				map = new mapboxgl.Map({
-					container: 'mapa',
+					container: 'customerLocation',
 					style: 'mapbox://styles/mapbox/streets-v11',
 					center: center,
 					zoom: 13
@@ -86,41 +81,6 @@
 		coordinates = [lngLat.lng, lngLat.lat];
 	}
 
-	//"https://api.mapbox.com/search/geocode/v6/reverse?longitude=-73.989&latitude=40.733&access_token=pk.eyJ1IjoiZGF2ZW5kYW5vaCIsImEiOiJjbTNieDh5aDEwejdjMmpwc2ozaGlvYzBkIn0.ZS1jDZX_RbhiMQC8_qJSog"
-
-	// Confirmar la ubicación y realizar reverse geocoding
-	async function confrimAddress() {
-		if (!coordinates || coordinates.length === 0) {
-			alert('Please select a location on the map');
-			return;
-		}
-
-		try {
-			// Llamada al API de reverse geocoding
-			const [longitude, latitude] = coordinates;
-			const response = await fetch(
-				`https://api.mapbox.com/search/geocode/v6/reverse?longitude=${longitude}&latitude=${latitude}&access_token=${mapboxAccessToken}`
-			);
-
-			if (!response.ok) {
-				throw new Error('failed to fetch address');
-			}
-
-			const result = await response.json();
-
-			const properties = result.features?.[0]?.properties || {};
-
-			fullAddress = properties.full_address || 'Address not found';
-			street = properties.name || '';
-			const formatted = properties.place_formatted?.split(',') || [];
-			zip = formatted[0]?.split(' ')[0] || '';
-			city = formatted[0]?.split(' ')[1] || '';
-			state = formatted[1]?.trim() || '';
-		} catch (error) {
-			console.error('Error fetching reverse geocoding:', error);
-		}
-	}
-
 	//stripe checkout
 
 	const location = $derived(JSON.stringify(coordinates));
@@ -128,6 +88,11 @@
 	async function checkout() {
 		if (data.customerId === null) {
 			toggle = true;
+			return;
+		}
+
+		if (!coordinates || coordinates.length === 0) {
+			alert('Please select a location on the map');
 			return;
 		}
 
@@ -140,56 +105,26 @@
 				return data.json();
 			})
 			.then((data) => {
-				console.log('data.url: ', data.url);
 				window.location.replace(data.url);
 			});
 	}
 </script>
 
-<h1>Select your location</h1>
-<div id="mapa" style="width: 100%; height: 500px;"></div>
-<button class="btn" onclick={() => confrimAddress()}>confirm address</button>
-
-<p>checkout total price: ${totalPrice}</p>
-
-<div class="my-4 flex flex-col items-center">
-	<div class="card card-bordered flex w-96 flex-col">
-		<div class="card-body">
-			<form>
-				<h2 class="card-title">Complete and confirm your delivery address</h2>
-
-				<label class="input input-bordered flex items-center gap-2">
-					Calle:
-					<input type="text" value={street} disabled />
-				</label>
-
-				<label class="input input-bordered flex items-center gap-2">
-					ZIP:
-					<input type="text" value={zip} disabled />
-				</label>
-
-				<label class="input input-bordered flex items-center gap-2">
-					City:
-					<input type="text" value={city} disabled />
-				</label>
-
-				<label class="input input-bordered flex items-center gap-2">
-					State:
-					<input type="text" value={state} disabled />
-				</label>
-
-				<label class="input input-bordered flex items-center gap-2">
-					Street Number:
-					<input type="text" placeholder="Ejemplo: 12B" />
-				</label>
-
-				<div class="card-actions justify-end">
-					<button class="btn" onclick={() => checkout()}>Confirm location & go to checkout</button>
-				</div>
-			</form>
+<div class="m-6 flex justify-center">
+	<div class="card bg-base-100 shadow-xl">
+		<h2 class="card-title justify-center">Select your location</h2>
+		<figure class="px-10 pt-10">
+			<div class=" h-96 w-96 md:w-[40rem] lg:w-[60rem]" id="customerLocation"></div>
+		</figure>
+		<div class="card-body items-center text-center">
+			<div class="card-actions">
+				<button onclick={() => checkout()} class="btn btn-primary"
+					>Confirm location & go to checkout</button
+				>
+				{#if toggleCheckout}
+					<p>autenticate primero</p>
+				{/if}
+			</div>
 		</div>
 	</div>
 </div>
-{#if toggle}
-	<p>autenticate primero</p>
-{/if}

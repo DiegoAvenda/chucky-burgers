@@ -3,7 +3,7 @@
 	import { enhance } from '$app/forms';
 	import { addToCart, substractFromCart } from '$lib/utils/cart.svelte';
 
-	let { userPicture, admin, customerLastMessageFrom } = $props();
+	let { userPicture, admin } = $props();
 
 	let totalPrice = $derived(cart.reduce((sum, item) => sum + item.price * item.quantity, 0));
 </script>
@@ -73,7 +73,7 @@
 					{#if cart.length > 0}
 						<div class="card-actions">
 							<a href="/checkout/{totalPrice}"
-								><button class="btn btn-primary btn-block">Stripe checkout</button></a
+								><button class="btn btn-primary btn-block">Select location</button></a
 							>
 						</div>
 					{/if}
@@ -98,6 +98,7 @@
 			>
 				{#if admin}
 					<li><a href="/admin" class="justify-between"> Admin pending orders </a></li>
+					<li><a href="/admin/prepared" class="justify-between"> Admin prepared orders </a></li>
 					<li><a href="/admin/delivered" class="justify-between"> Admin delivered orders </a></li>
 				{:else}
 					<li>
@@ -111,11 +112,13 @@
 				{#if !userPicture}
 					<li><a href="/api/oauth/google">Login</a></li>
 				{/if}
-				<li>
-					<form method="post" use:enhance action="/?/signOut">
-						<button>Logout</button>
-					</form>
-				</li>
+				{#if userPicture}
+					<li>
+						<form method="post" use:enhance action="/?/signOut">
+							<button>Logout</button>
+						</form>
+					</li>
+				{/if}
 			</ul>
 		</div>
 	</div>

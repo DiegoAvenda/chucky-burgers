@@ -17,7 +17,7 @@ export const load = async ({ locals, url }) => {
 		const ordersCollection = db.collection('orders');
 		const query = { customerId, delivered: false };
 		const options = {
-			sort: { createdAt: 1 },
+			sort: { createdAt: -1 },
 			projection: { _id: 0 }
 		};
 

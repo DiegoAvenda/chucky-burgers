@@ -11,10 +11,10 @@ export const load = async ({ locals }) => {
 		const db = mongoClient.db('chucky');
 		const ordersCollection = db.collection('orders');
 		const query = { delivered: true };
-		const options = { sort: { createdAt: 1 }, projection: { _id: 0 } };
+		const options = { sort: { createdAt: -1 }, projection: { _id: 0 } };
 
 		const rawOrders = await ordersCollection.find(query, options).toArray();
-		console.log('raw orders: ', rawOrders);
+
 		const orders = rawOrders.map((order) => ({
 			...order,
 			createdAt: order.createdAt.toLocaleTimeString('en-US', {

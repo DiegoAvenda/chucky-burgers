@@ -1,5 +1,6 @@
 import client from '$lib/server/db.js';
 import { redirect } from '@sveltejs/kit';
+import { ObjectId } from 'mongodb';
 
 export const load = async ({ locals }) => {
 	if (!locals.user.admin) {
@@ -10,8 +11,8 @@ export const load = async ({ locals }) => {
 		const mongoClient = await client.connect();
 		const db = mongoClient.db('chucky');
 		const ordersCollection = db.collection('orders');
-		const query = { delivered: false };
-		const rawOrders = await ordersCollection.find(query, { sort: { createdAt: 1 } }).toArray();
+		const query = { prepared: false };
+		const rawOrders = await ordersCollection.find(query, { sort: { createdAt: -1 } }).toArray();
 
 		const orders = rawOrders.map((order) => ({
 			...order,
@@ -30,5 +31,31 @@ export const load = async ({ locals }) => {
 		};
 	} catch (e) {
 		console.log(e);
+	}
+};
+
+export const actions = {
+	default: async ({ request }) => {
+		const data = await request.formData();
+		const orderId = data.get('orderId');
+		console.log('order id: ', orderId);
+		const objectId = new ObjectId(orderId);
+
+		try {
+			const mongoClient = await client.connect();
+			const db = mongoClient.db('chucky');
+			const orders = db.collection('orders');
+			const filter = { _id: objectId };
+			const updateDoc = {
+				$set: {
+					prepared: true,
+					preparedAt: new Date()
+				}
+			};
+
+			await orders.updateOne(filter, updateDoc);
+		} catch (error) {
+			console.log(error);
+		}
 	}
 };

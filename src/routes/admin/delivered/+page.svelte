@@ -2,41 +2,44 @@
 	let { data } = $props();
 </script>
 
-<div class="prose mt-2 flex justify-center">
-	<h1>Delivered orders</h1>
-</div>
+<div class="mt-4 flex flex-col items-center">
+	<div class="prose mt-2 flex justify-center">
+		<h1>Delivered orders</h1>
+	</div>
 
-<div class="my-6 flex flex-col items-center gap-1">
-	{#each data.orders as order}
-		<div class="card card-bordered card-compact w-96 bg-base-100 shadow-xl">
-			<div class="card-body">
-				<div class="flex items-center justify-between">
-					<p class="text-xl font-bold">{order.customerName}</p>
-					<p>Created at {order.createdAt}</p>
-				</div>
-				<table class="table">
-					<thead>
-						<tr>
-							<th>Dish</th>
-							<th>Qty</th>
-							<th>Subtotal</th>
-						</tr>
-					</thead>
-					<tbody>
-						{#each order.items as item}
+	<div class="my-6 flex flex-col items-center gap-1">
+		{#each data.orders as order}
+			<div class="card card-bordered card-compact w-96 bg-base-100 shadow-xl">
+				<div class="card-body">
+					<div class="flex items-center justify-between">
+						<p class="text-xl font-bold">{order.customerName}</p>
+						<p>Created at {order.createdAt}</p>
+					</div>
+					<table class="table">
+						<thead>
 							<tr>
-								<th>{item.name}</th>
-								<td>{item.quantity}</td>
-								<td>${item.total}</td>
+								<th>Dish</th>
+								<th>Qty</th>
 							</tr>
-						{/each}
-					</tbody>
-				</table>
-				<div class="flex items-center justify-between">
-					<p class="font-bold">Total price ${order.totalPrice}</p>
-					<p>Delivered at {order.deliveredAt}</p>
+						</thead>
+						<tbody>
+							{#each order.items as item}
+								<tr>
+									<th>{item.name}</th>
+									<td>{item.quantity}</td>
+								</tr>
+							{/each}
+						</tbody>
+					</table>
+					<div class="flex items-center justify-between">
+						<p class="font-bold">Total price ${order.totalPrice}</p>
+						<p>Delivered at {order.deliveredAt}</p>
+					</div>
 				</div>
 			</div>
-		</div>
-	{/each}
+		{/each}
+	</div>
+	{#if data.orders.length === 0}
+		<p>You don't have delivered orders</p>
+	{/if}
 </div>

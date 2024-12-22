@@ -2,24 +2,23 @@
 	let { data } = $props();
 </script>
 
-<div class="flex flex-col items-center">
-	<div class="prose mt-4 flex justify-center">
-		<h1>Delivered orders</h1>
+<div class="mt-4 flex flex-col items-center">
+	<div class="prose mt-2 flex justify-center">
+		<h1>Prepared orders</h1>
 	</div>
 
 	<div class="my-6 flex flex-col items-center gap-1">
-		{#each data.orders as order}
+		{#each data.orders as order (order._id)}
 			<div class="card card-bordered card-compact w-96 bg-base-100 shadow-xl">
 				<div class="card-body">
-					<div class="flex items-center justify-between">
-						<p class="text-xl font-bold">Ordered at {order.createdAt}</p>
-					</div>
+					<h2 class="card-title">{order.customerName}</h2>
+					<p>Created at {order.createdAt}</p>
+					<p>Prepared at {order.preparedAt}</p>
 					<table class="table">
 						<thead>
 							<tr>
 								<th>Dish</th>
 								<th>Qty</th>
-								<th>Total</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -27,14 +26,13 @@
 								<tr>
 									<th>{item.name}</th>
 									<td>{item.quantity}</td>
-									<td>${item.total}</td>
 								</tr>
 							{/each}
 						</tbody>
 					</table>
-					<div class="flex items-center justify-between">
-						<p class="font-bold">Total price ${order.totalPrice}</p>
-						<p>Delivered at {order.deliveredAt}</p>
+					<p class="font-bold">Total price ${order.totalPrice}</p>
+					<div class="card-a-ctions flex justify-end gap-1">
+						<a href={`/admin/${order._id}`}> <button class="btn">See location</button></a>
 					</div>
 				</div>
 			</div>
@@ -42,6 +40,6 @@
 	</div>
 
 	{#if data.orders.length === 0}
-		<p class="m-8">You don't have pending orders</p>
+		<p>No prepared orders to deliver.</p>
 	{/if}
 </div>
