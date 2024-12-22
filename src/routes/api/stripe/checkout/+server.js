@@ -27,8 +27,8 @@ export const POST = async ({ request }) => {
 		line_items,
 		metadata: { customerId, location },
 		mode: 'payment',
-		success_url: 'http://localhost:5173/profile',
-		cancel_url: 'http://localhost:5173/cancel',
+		success_url: 'https://chucky-burgers.vercel.app/profile',
+		cancel_url: 'https://chucky-burgers.vercel.app/cancel',
 		shipping_address_collection: {
 			allowed_countries: ['US', 'MX']
 		}
