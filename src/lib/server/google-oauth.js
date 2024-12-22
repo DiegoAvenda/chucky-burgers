@@ -7,5 +7,5 @@ export const google = new Google(
 	GOOGLE_CLIENT_SECRET,
 	dev
 		? 'http://localhost:5173/api/oauth/google/callback'
-		: 'https://sveltestore-gamma.vercel.app/api/oauth/google/callback'
+		: 'https://chucky-burgers.vercel.app/api/oauth/google/callback'
 );
