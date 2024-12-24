@@ -11,6 +11,10 @@ const stripe = new Stripe(STRIPE_SECRET_KEY);
 export async function POST({ request }) {
 	const rawBody = await request.arrayBuffer();
 
+	console.log('webhook secret: ', STRIPE_WEBHOOK_SECRET);
+	console.log('raw body: ', Buffer.from(rawBody));
+	console.log('signature: ', request.headers.get('stripe-signature'));
+
 	const event = await stripe.webhooks.constructEvent(
 		Buffer.from(rawBody),
 		request.headers.get('stripe-signature'),
