@@ -87,7 +87,7 @@
 
 	async function checkout() {
 		if (data.customerId === null) {
-			toggle = true;
+			toggleCheckout = true;
 			return;
 		}
 
@@ -121,10 +121,10 @@
 				<button onclick={() => checkout()} class="btn btn-primary"
 					>Confirm location & go to checkout</button
 				>
-				{#if toggleCheckout}
-					<p>autenticate primero</p>
-				{/if}
 			</div>
+			{#if toggleCheckout}
+				<span>autenticate primero</span>
+			{/if}
 		</div>
 	</div>
 </div>
