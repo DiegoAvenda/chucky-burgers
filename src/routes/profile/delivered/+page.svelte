@@ -2,8 +2,8 @@
 	let { data } = $props();
 </script>
 
-<div class="flex flex-col items-center">
-	<h1 class="mt-2 flex justify-center">Delivered orders</h1>
+<div class="mt-6 flex flex-col items-center">
+	<h1 class="flex justify-center text-3xl font-bold">Delivered orders</h1>
 
 	<div class="my-6 flex flex-col items-center gap-1">
 		{#each data.orders as order}
