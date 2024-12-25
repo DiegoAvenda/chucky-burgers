@@ -28,7 +28,8 @@ export const load = async ({ locals, url }) => {
 			createdAt: order.createdAt.toLocaleTimeString('en-US', {
 				hour: '2-digit',
 				minute: '2-digit',
-				hour12: true
+				hour12: true,
+				timeZone: 'America/Mexico_City'
 			})
 		}));
 

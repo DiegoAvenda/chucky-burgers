@@ -50,7 +50,7 @@ export async function POST({ request }) {
 				location,
 				items,
 				totalPrice,
-				createdAt: new Date(), // Fecha y hora de creación
+				createdAt: new Date(),
 				delivered: false,
 				prepared: false
 			});
