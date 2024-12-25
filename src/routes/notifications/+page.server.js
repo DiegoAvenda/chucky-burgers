@@ -1,6 +1,6 @@
 import { redirect } from '@sveltejs/kit';
 import { error } from '@sveltejs/kit';
-import { notifUser } from '$lib/server/db/subscriptionDb';
+import { notifUser } from '$lib/server/push-subscription';
 
 export const load = async (event) => {
 	if (!event.locals.user) {
