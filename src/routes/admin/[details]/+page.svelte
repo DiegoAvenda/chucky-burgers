@@ -38,6 +38,7 @@
 
 <div class="hero min-h-screen bg-base-200">
 	<div class="hero-content flex-col">
+		<h1 class="m-2 text-3xl font-bold">Admin order details</h1>
 		<div class=" h-[30rem] w-96 md:w-[40rem] lg:w-[60rem]" id="customerLocation"></div>
 
 		<div class="card card-bordered card-compact bg-base-100 shadow-md">

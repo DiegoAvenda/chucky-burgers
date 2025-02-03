@@ -3,7 +3,7 @@
 </script>
 
 <div class="mt-6 flex flex-col items-center">
-	<h1 class="flex justify-center text-3xl font-bold">Prepared orders</h1>
+	<h1 class="flex justify-center text-3xl font-bold">Admin prepared orders</h1>
 
 	<div class="my-6 flex flex-col items-center gap-1">
 		{#each data.orders as order (order._id)}
