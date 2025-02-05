@@ -19,7 +19,7 @@
 		<p>The Full Fat Stack Burger© {new Date().getFullYear()} - All right reserved</p>
 	</aside>
 	<nav class="grid-flow-col gap-4 md:place-self-center md:justify-self-end">
-		<a href="x.com" aria-label="x icon">
+		<a href="https://x.com" target="_blank" aria-label="x icon">
 			<svg
 				xmlns="http://www.w3.org/2000/svg"
 				width="24"
@@ -32,7 +32,7 @@
 				></path>
 			</svg>
 		</a>
-		<a href="youtube.com" aria-label="youtube icon">
+		<a href="https://youtube.com" target="_blank" aria-label="youtube icon">
 			<svg
 				xmlns="http://www.w3.org/2000/svg"
 				width="24"
@@ -45,7 +45,7 @@
 				></path>
 			</svg>
 		</a>
-		<a href="facebook.com" aria-label="facebook icon">
+		<a href="https://facebook.com" target="_blank" aria-label="facebook icon">
 			<svg
 				xmlns="http://www.w3.org/2000/svg"
 				width="24"
