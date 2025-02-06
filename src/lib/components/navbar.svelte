@@ -10,7 +10,7 @@
 
 <div class="navbar my-1 bg-base-100">
 	<div class="flex-1">
-		<a href="/" class="btn btn-ghost mr-4 text-xl">The Full Fat Stack Burger</a>
+		<a href="/" class="btn btn-ghost mr-4 text-xl">Svelte Burgers</a>
 		<a href="/menu" class="btn btn-ghost text-xl">Menu</a>
 	</div>
 	<div class="flex-none">
