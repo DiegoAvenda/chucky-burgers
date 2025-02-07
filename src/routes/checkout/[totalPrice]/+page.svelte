@@ -7,7 +7,7 @@
 
 	let { data } = $props();
 
-	let coordinates = $state([]); // Para mostrar las coordenadas actuales
+	let coordinates = $state([]);
 	let map;
 	let marker;
 	let geocoder;
@@ -22,7 +22,6 @@
 		if (typeof window !== 'undefined') {
 			mapboxgl.accessToken = mapboxAccessToken;
 
-			// Configurar el mapa inicial en caso de usar geolocalización o un centro por defecto
 			navigator.geolocation.getCurrentPosition(successLocation, errorLocation, {
 				enableHighAccuracy: true
 			});
@@ -32,10 +31,9 @@
 			}
 
 			function errorLocation() {
-				setupMap([-99.64907673779962, 20.372424487154948]); // Centro por defecto
+				setupMap([-122.4194, 37.7749]);
 			}
 
-			// Inicializar el mapa y el marcador
 			function setupMap(center) {
 				map = new mapboxgl.Map({
 					container: 'customerLocation',
@@ -46,7 +44,6 @@
 
 				marker = new mapboxgl.Marker({ draggable: true }).setLngLat(center).addTo(map);
 
-				// Actualizar las coordenadas cuando el marcador sea arrastrado
 				marker.on('dragend', updateCoordinates);
 
 				geocoder = new MapboxGeocoder({
@@ -55,27 +52,21 @@
 					marker: false
 				});
 
-				// Evento cuando se selecciona una dirección
 				geocoder.on('result', (e) => {
 					const coords = e.result.center;
 
-					// Mover el marcador existente a la nueva ubicación
 					marker.setLngLat(coords);
 
-					// Centrar el mapa en la nueva ubicación
 					map.flyTo({ center: coords });
 
-					// Actualizar coordenadas
 					updateCoordinates();
 				});
 
-				// Agregar el buscador al mapa
 				map.addControl(geocoder);
 			}
 		}
 	});
 
-	// Actualizar las coordenadas al mover el marcador
 	function updateCoordinates() {
 		const lngLat = marker.getLngLat();
 		coordinates = [lngLat.lng, lngLat.lat];
