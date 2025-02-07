@@ -1,5 +1,6 @@
 import Stripe from 'stripe';
 import { STRIPE_SECRET_KEY } from '$env/static/private';
+import { dev } from '$app/environment';
 
 const stripe = new Stripe(STRIPE_SECRET_KEY);
 
@@ -27,8 +28,10 @@ export const POST = async ({ request }) => {
 		line_items,
 		metadata: { customerId, location },
 		mode: 'payment',
-		success_url: 'https://chucky-burgers.vercel.app/profile',
-		cancel_url: 'https://chucky-burgers.vercel.app/cancel',
+		success_url: dev
+			? 'http://localhost:5173/profile'
+			: 'https://chucky-burgers.vercel.app/profile',
+		cancel_url: dev ? 'http://localhost:5173/cancel' : 'https://chucky-burgers.vercel.app/cancel',
 		shipping_address_collection: {
 			allowed_countries: ['US', 'MX']
 		}

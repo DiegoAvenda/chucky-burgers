@@ -114,7 +114,7 @@
 				>
 			</div>
 			{#if toggleCheckout}
-				<span>autenticate primero</span>
+				<span>Login first</span>
 			{/if}
 		</div>
 	</div>
