@@ -8,7 +8,7 @@
 	let totalPrice = $derived(cart.reduce((sum, item) => sum + item.price * item.quantity, 0));
 </script>
 
-<div class="navbar my-1 bg-base-100">
+<div class="navbar my-1 border-b border-base-200 bg-base-100">
 	<div class="flex-1">
 		<a href="/" class="btn btn-ghost mr-4 text-xl">Svelte Burgers</a>
 		<a href="/menu" class="btn btn-ghost text-xl">Menu</a>
