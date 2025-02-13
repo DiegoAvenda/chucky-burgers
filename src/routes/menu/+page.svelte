@@ -11,7 +11,7 @@
 		class="m-9 flex flex-col items-center gap-2 md:grid md:grid-cols-2 lg:grid-cols-3 lg:justify-center"
 	>
 		{#each products as product, i}
-			<div class="card card-bordered card-compact w-96 bg-base-100 shadow-xl">
+			<div class="card card-bordered card-compact w-96 border-base-content bg-base-100 shadow-xl">
 				<figure>
 					<img alt={product.name} src={product.image} />
 				</figure>

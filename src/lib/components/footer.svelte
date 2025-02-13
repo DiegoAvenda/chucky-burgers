@@ -1,4 +1,4 @@
-<footer class="footer items-center border-t border-base-200 bg-base-100 p-4">
+<footer class="footer items-center border-t border-base-content bg-base-100 p-4">
 	<aside class="grid-flow-col items-center">
 		<p>Svelte Burgers© {new Date().getFullYear()} - All right reserved</p>
 	</aside>
