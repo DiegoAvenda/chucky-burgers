@@ -12,6 +12,7 @@
 	<div class="flex-1">
 		<a href="/" class="btn btn-ghost mr-4 text-xl">Svelte Burgers</a>
 		<a href="/menu" class="btn btn-ghost text-xl">Menu</a>
+		<a href="/contact" class="btn btn-ghost text-xl">Contact</a>
 	</div>
 	<div class="flex-none">
 		<div class="dropdown dropdown-end">
