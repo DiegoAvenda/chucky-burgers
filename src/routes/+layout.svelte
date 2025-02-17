@@ -10,6 +10,15 @@
 	<title>Chucky burgers</title>
 </svelte:head>
 
+{#if !data.admin}
+	<form method="post" action="/?/adminMode">
+		<button
+			class="absolute m-1 rounded bg-white px-3 text-xs text-black opacity-50 transition-all hover:bg-white hover:opacity-100"
+			>Become admin</button
+		>
+	</form>
+{/if}
+
 <div class="flex min-h-screen flex-col">
 	<Navbar
 		customerLastMessageFrom={data.customerLastMessageFrom}
