@@ -10,7 +10,7 @@
 	<title>Chucky burgers</title>
 </svelte:head>
 
-{#if !data.admin}
+{#if data.username && !data.admin}
 	<form method="post" action="/?/adminMode">
 		<button
 			class="absolute m-1 rounded bg-white px-3 text-xs text-black opacity-50 transition-all hover:bg-white hover:opacity-100"
