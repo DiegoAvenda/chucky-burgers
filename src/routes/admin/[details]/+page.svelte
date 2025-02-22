@@ -1,6 +1,7 @@
 <script>
 	import mapboxgl from 'mapbox-gl';
 	import { onMount } from 'svelte';
+	import { PUBLIC_MAPBOX_KEY } from '$env/static/public';
 
 	let { data } = $props();
 
@@ -16,10 +17,8 @@
 
 	onMount(() => {
 		if (typeof window !== 'undefined') {
-			mapboxgl.accessToken =
-				'pk.eyJ1IjoiZGF2ZW5kYW5vaCIsImEiOiJjbTNieDh5aDEwejdjMmpwc2ozaGlvYzBkIn0.ZS1jDZX_RbhiMQC8_qJSog';
+			mapboxgl.accessToken = PUBLIC_MAPBOX_KEY;
 
-			// Inicializar el mapa y el marcador
 			function setupMap(center) {
 				map = new mapboxgl.Map({
 					container: 'customerLocation',

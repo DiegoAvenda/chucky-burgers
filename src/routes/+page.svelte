@@ -1,15 +1,13 @@
 <script>
 	import mapboxgl from 'mapbox-gl';
 	import { onMount } from 'svelte';
+	import { PUBLIC_MAPBOX_KEY } from '$env/static/public';
 
 	let map;
 
-	const mapboxAccessToken =
-		'pk.eyJ1IjoiZGF2ZW5kYW5vaCIsImEiOiJjbTNieDh5aDEwejdjMmpwc2ozaGlvYzBkIn0.ZS1jDZX_RbhiMQC8_qJSog';
-
 	onMount(() => {
 		if (typeof window !== 'undefined') {
-			mapboxgl.accessToken = mapboxAccessToken;
+			mapboxgl.accessToken = PUBLIC_MAPBOX_KEY;
 
 			setupMap([-117.38316033313538, 33.19500689328807]);
 
